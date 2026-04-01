@@ -45,7 +45,7 @@ Desktop app built using JavaFX.
 
 ## 📸 Screenshots
 
-(Add your project screenshots here)
+![Portfolio](./screenshots/portfolio.png)
 
 ---
 
