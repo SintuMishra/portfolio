@@ -1,3 +1,4 @@
+import { TypeAnimation } from "react-type-animation";
 import React, { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import {
@@ -77,44 +78,56 @@ const skillsData = [
 
 const projects = [
   {
-    title: "Bus Route Optimizer",
+    title: "Campus Issue Tracker",
     category: "Full Stack",
     description:
-      "A smart transit platform for Delhi Transport Corporation that suggests alternate bus routes using traffic-aware logic, route mapping, and live-friendly UI patterns.",
-    tech: ["React.js", "Spring Boot", "Google Maps API", "REST API", "Tailwind CSS"],
-    live: "#",
-    github: "#",
+      "Full-stack issue tracking system with JWT authentication and role-based access.",
+    tech: ["React", "Spring Boot", "MySQL", "JWT"],
+    live: "https://issue-tracker-frontend-two.vercel.app/",
+    github: "https://github.com/SintuMishra",
     featured: true,
   },
   {
-    title: "Placement Prep Dashboard",
+    title: "Portfolio Website",
     category: "Frontend",
     description:
-      "A productivity dashboard to track DSA, mock interviews, notes, and weekly learning goals with elegant charts and progress sections.",
-    tech: ["React.js", "Tailwind CSS", "Framer Motion", "Local Storage"],
-    live: "#",
-    github: "#",
-    featured: false,
+      "A modern personal portfolio website showcasing projects, skills, and achievements with smooth animations and responsive design.",
+    tech: ["React.js", "Tailwind CSS", "Framer Motion"],
+    live: "https://portfolio-flame-six-93wdoxmah1.vercel.app/",
+    github: "https://github.com/SintuMishra",
+    featured: true,
   },
   {
-    title: "Student Analytics Portal",
-    category: "Data",
-    description:
-      "An academic insights portal that visualizes student performance, attendance patterns, and subject-level trends for better decision-making.",
-    tech: ["React.js", "Node.js", "SQL", "Charts", "Analytics"],
-    live: "#",
-    github: "#",
-    featured: false,
+    title: "Weather App",
+    category: "Frontend",
+    description: "Weather app using API for real-time data.",
+    tech: ["JavaScript", "API", "HTML", "CSS"],
+    live: "",
+    github: "https://github.com/SintuMishra/weather-app",
   },
   {
-    title: "Smart Resume Screener",
-    category: "ML",
-    description:
-      "A machine learning-powered screening prototype that classifies resumes and matches profiles with job-related skill keywords.",
-    tech: ["Machine Learning", "Python", "Flask API", "NLP", "React"],
-    live: "#",
+    title: "Todo App",
+    category: "Frontend",
+    description: "Task manager with CRUD operations.",
+    tech: ["React", "JavaScript"],
+    live: "",
+    github: "https://github.com/SintuMishra/todo-app",
+  },
+  {
+    title: "JavaFX Calculator",
+    category: "Backend",
+    description: "Scientific calculator using JavaFX.",
+    tech: ["Java", "JavaFX"],
+    live: "",
+    github: "https://github.com/SintuMishra/JavaFX-Scientific-Calculator",
+  },
+  {
+    title: "Bus Route Optimizer (In Progress)",
+    category: "Full Stack",
+    description: "Traffic-based smart routing system.",
+    tech: ["React", "Spring Boot", "Maps API"],
+    live: "",
     github: "#",
-    featured: false,
   },
 ];
 
@@ -281,15 +294,32 @@ function App() {
                 Available for internships & placements
               </div>
 
-              <h1 className="max-w-4xl text-4xl font-extrabold leading-tight tracking-tight text-slate-900 sm:text-5xl lg:text-7xl dark:text-white">
-                Final Year CSE & Data Science Student building
-                <span className="bg-gradient-to-r from-cyan-500 via-sky-500 to-fuchsia-500 bg-clip-text text-transparent">
-                  {" "}modern software & data-driven products
-                </span>
+              <h1 className="text-4xl font-bold text-slate-900 dark:text-white">
+                Hi, I'm Sintu Mishra 👋
               </h1>
+
+              <div className="mt-3">
+                <TypeAnimation
+                  sequence={[
+                    "Java Developer 💻",
+                    1500,
+                    "Full Stack Developer 🌐",
+                    1500,
+                    "DSA Problem Solver 🧠",
+                    1500,
+                  ]}
+                  wrapper="span"
+                  speed={50}
+                  repeat={Infinity}
+                  className="text-xl text-cyan-500 font-semibold"
+                />
+              </div>
 
               <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">
                 I’m <span className="font-semibold text-slate-900 dark:text-white">Sintu Mishra</span>, a software developer and data science student focused on Java, MERN Stack, DSA, Spring Boot, and machine learning. I create clean, scalable, recruiter-friendly projects with strong UI and practical impact.
+              </p>
+              <p className="mt-4 text-lg font-medium text-slate-700 dark:text-slate-300">
+                🚀 Solved 200+ DSA problems | Built 3+ Full Stack Projects
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -491,55 +521,93 @@ function App() {
                 <motion.div
                   key={project.title}
                   whileHover={{ y: -6 }}
-                  className="group rounded-[2rem] border border-slate-200 bg-white p-7 shadow-xl shadow-slate-200/50 transition dark:border-white/10 dark:bg-white/5 dark:shadow-none"
+                  className="group overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-xl transition duration-300 hover:scale-[1.02] hover:shadow-cyan-500/20 dark:border-white/10 dark:bg-white/5"
                 >
-                  <div className="mb-4 flex items-start justify-between gap-4">
-                    <div>
-                      <div className="mb-3 inline-flex rounded-full bg-cyan-500/10 px-3 py-1 text-xs font-semibold text-cyan-600 dark:text-cyan-300">
+                  {/* IMAGE */}
+                  <div className="h-48 w-full overflow-hidden relative">
+                    <img
+                      src={`/${
+                      project.title.includes("Bus")
+                        ? "bus.png"
+                        : project.title.includes("JavaFX")
+                        ? "javafx.png"
+                        : project.title.includes("Portfolio")
+                        ? "portfolio.png"
+                        : project.title.includes("Issue")
+                        ? "issue.png"
+                        : project.title.includes("Weather")
+                        ? "weather.png"
+                        : project.title.includes("Todo")
+                        ? "todo.png"
+                        : "default.png"
+                    }`}
+                      alt={project.title}
+                      className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
+                    />
+                    {/* 🔥 GRADIENT OVERLAY */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-80" />
+                  </div>
+
+                  {/* CONTENT */}
+                  <div className="p-6 relative z-10">
+                    <div className="mb-2 flex items-center justify-between">
+                      <span className="text-xs font-semibold text-cyan-500">
                         {project.category}
-                      </div>
-                      <h3 className="text-2xl font-semibold text-slate-900 dark:text-white">{project.title}</h3>
+                      </span>
+
+                      {project.featured && (
+                        <span className="text-xs text-amber-400">★ Featured</span>
+                      )}
                     </div>
-                    {project.featured && (
-                      <span className="rounded-full border border-amber-500/20 bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-600 dark:text-amber-300">
-                        Featured
-                      </span>
-                    )}
+
+                    <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
+                      {project.title}
+                    </h3>
+
+                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+                      {project.description}
+                    </p>
+
+                    {/* TECH */}
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {project.tech.map((item) => (
+                        <span
+                          key={item}
+                          className="rounded-full bg-slate-100 px-2 py-1 text-xs dark:bg-white/10"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* BUTTONS */}
+                    <div className="mt-5 flex gap-4">
+                      {project.live && (
+                        <a
+                          href={project.live}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-sm font-medium text-cyan-400 hover:underline"
+                        >
+                          Live →
+                        </a>
+                      )}
+
+                      {project.github && project.github !== "#" && (
+                        <a
+                          href={project.github}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-sm font-medium text-white hover:underline"
+                        >
+                          GitHub →
+                        </a>
+                      )}
+                    </div>
                   </div>
 
-                  <p className="leading-7 text-slate-600 dark:text-slate-300">{project.description}</p>
-
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {project.tech.map((item) => (
-                      <span
-                        key={item}
-                        className="rounded-full border border-slate-300 bg-slate-50 px-3 py-1 text-xs font-medium text-slate-700 dark:border-white/10 dark:bg-white/5 dark:text-slate-300"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="mt-6 flex flex-wrap gap-3">
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition hover:opacity-90 dark:bg-white dark:text-slate-900"
-                    >
-                      <ExternalLink className="h-4 w-4" />
-                      Live Demo
-                    </a>
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 dark:border-white/10 dark:bg-white/5 dark:text-white"
-                    >
-                      <FaGithub className="h-4 w-4" />
-                      GitHub
-                    </a>
-                  </div>
+                  {/* 🔥 GLOW EFFECT */}
+                  <div className="absolute inset-0 rounded-[2rem] border border-transparent group-hover:border-cyan-500/40 transition duration-300" />
                 </motion.div>
               ))}
             </div>
@@ -688,7 +756,7 @@ function App() {
                       <label className="mb-2 block text-sm font-medium text-slate-700 dark:text-slate-300">Email</label>
                       <input
                         type="email"
-                        placeholder="you@example.com"
+                        placeholder="your@email.com"
                         className="w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 outline-none transition focus:border-cyan-500 dark:border-white/10 dark:bg-white/5 dark:text-white"
                       />
                     </div>
