@@ -648,8 +648,8 @@ function App() {
           >
             <SectionHeading
               badge="Resume"
-              title="Make it easy for recruiters to know you fast"
-              description="Keep your latest resume in the public folder as resume.pdf so recruiters can open or download it directly."
+              title="Know me beyond the code"
+              description="Here’s my latest resume showcasing my journey in Java, Full Stack Development, DSA, and real-world project building. Currently open to Software Development and Data Science opportunities."
             />
 
             <div className="flex flex-wrap items-center justify-center gap-4">
@@ -678,8 +678,8 @@ function App() {
           <motion.div variants={sectionFade} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}>
             <SectionHeading
               badge="Contact"
-              title="Let’s build something meaningful"
-              description="This contact form is styled and ready. Connect it to EmailJS, Formspree, a Node backend, or Spring Boot API to make it functional."
+              title="Let’s build something impactful together"
+              description="I’m actively looking for software development and data-related opportunities. Whether it's an internship, full-time role, or collaboration — I’d love to connect. Drop a message or reach out directly. I respond quickly"
             />
 
             <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
