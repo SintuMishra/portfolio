@@ -98,6 +98,16 @@ const projects = [
     featured: true,
   },
   {
+  title: "Student Performance Predictor",
+  category: "Machine Learning / Full Stack",
+  description:
+    "Deployed full-stack ML application with a React frontend and Flask API backend that predicts student performance using a Scikit-learn classification model.",
+  tech: ["React", "Flask", "Scikit-learn", "Tailwind CSS", "Render", "Vercel"],
+  live: "https://student-predictor-frontend-ashy.vercel.app/",
+  github: "https://github.com/SintuMishra",
+  featured: true,
+  },
+  {
     title: "Weather App",
     category: "Frontend",
     description: "Weather app using API for real-time data.",
@@ -530,7 +540,9 @@ function App() {
                       project.title.includes("Bus")
                         ? "bus.png"
                         : project.title.includes("JavaFX")
-                        ? "javafx.png"
+                        ? "calculator.png"
+                        : project.title.includes("Student Performance Predictor")
+                        ? "predictor.png"
                         : project.title.includes("Portfolio")
                         ? "portfolio.png"
                         : project.title.includes("Issue")
