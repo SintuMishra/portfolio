@@ -2,6 +2,220 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
+:root {
+  color-scheme: light;
+  --bg-deep: #EAF0F6;
+  --bg-page: #F6F8FB;
+  --surface-1: #FFFFFF;
+  --surface-2: #F1F5F9;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+  --accent-primary: #0284C7;
+  --accent-text: #0369A1;
+  --accent-secondary: #0891B2;
+  --accent-deep: #0369A1;
+  --status-positive: #047857;
+  --steel: #64748B;
+  --border-steel: rgba(15,23,42,.10);
+  --highlight: #FFFFFF;
+  --shadow-color: #0F172A;
+  --mask-solid: #000000;
+  --button-bg: #0F172A;
+  --button-text: #F8FAFC;
 }
+.dark {
+  color-scheme: dark;
+  --bg-deep: #050B14;
+  --bg-page: #07111F;
+  --surface-1: #0D1726;
+  --surface-2: #111D2E;
+  --text-primary: #F8FAFC;
+  --text-secondary: #CBD5E1;
+  --text-muted: #94A3B8;
+  --accent-primary: #22D3EE;
+  --accent-text: #22D3EE;
+  --accent-secondary: #38BDF8;
+  --accent-deep: #0EA5E9;
+  --status-positive: #34D399;
+  --steel: #94A3B8;
+  --border-steel: rgba(148,163,184,.14);
+  --shadow-color: #000000;
+  --button-bg: #F8FAFC;
+  --button-text: #0F172A;
+}
+
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { margin: 0; min-width: 320px; background: var(--bg-page); color: var(--text-primary); @apply antialiased; }
+  section { scroll-margin-top: 6rem; }
+  a, button { -webkit-tap-highlight-color: transparent; }
+  :focus-visible { outline: 3px solid var(--accent-primary); outline-offset: 4px; }
+  .dark :focus-visible { outline-color: var(--accent-primary); }
+  ::selection { @apply bg-cyan-200 text-slate-950; }
+}
+
+@layer components {
+  .site-container { @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12; }
+  .section-shell { @apply site-container border-t border-steel py-16 sm:py-20 lg:py-24 border-steel; }
+  .eyebrow { @apply text-xs font-semibold uppercase leading-6 tracking-[0.14em] text-accent text-accent; }
+  .body-copy { @apply text-base leading-8 text-secondary text-secondary; }
+  .surface { @apply min-w-0 rounded-lg border border-steel bg-surface border-steel bg-surface; }
+  .tech-chip { @apply rounded border border-steel bg-page px-2.5 py-1.5 text-sm leading-5 text-secondary border-steel bg-surface text-secondary; }
+  .icon-button { @apply flex h-11 w-11 items-center justify-center rounded-md text-secondary hover:bg-raised text-secondary ; }
+  .text-link { @apply text-secondary hover:text-accent text-secondary ; }
+}
+
+.skip-link { position: fixed; top: 1rem; left: 1rem; z-index: 100; transform: translateY(-200%); padding: 0.75rem 1rem; background: var(--surface-1); color: var(--text-primary); border-radius: 0.25rem; }
+.skip-link:focus { transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* Technical surfaces: cool light materials and layered navy in dark mode. */
+.technical-panel {
+  position: relative;
+  min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--steel) 32%, transparent);
+  border-radius: 10px;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--highlight) 96%, transparent), color-mix(in srgb, var(--steel) 88%, transparent));
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--highlight) 90%, transparent), 0 12px 32px -24px color-mix(in srgb, var(--surface-1) 35%, transparent);
+}
+.dark .technical-panel {
+  border-color: color-mix(in srgb, var(--steel) 19%, transparent);
+  background: linear-gradient(145deg, color-mix(in srgb, var(--surface-1) 90%, transparent), color-mix(in srgb, var(--surface-1) 94%, transparent));
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--surface-2) 5%, transparent), 0 16px 40px -24px color-mix(in srgb, var(--shadow-color) 65%, transparent);
+}
+.profile-panel { padding: clamp(1.25rem, 3vw, 2rem); backdrop-filter: blur(10px); }
+.profile-panel::before, .flagship-panel::before {
+  content: ''; position: absolute; pointer-events: none; top: -1px; left: 1.5rem;
+  width: 5rem; height: 2px; background: var(--accent-primary);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--accent-primary) 20%, transparent);
+}
+.dark .profile-panel::before, .dark .flagship-panel::before { background: var(--accent-primary); }
+.metadata-panel { padding: 1.5rem; border: 1px solid color-mix(in srgb, var(--steel) 30%, transparent); border-radius: 6px; background: color-mix(in srgb, var(--steel) 40%, transparent); }
+.dark .metadata-panel { border-color: color-mix(in srgb, var(--steel) 16%, transparent); background: color-mix(in srgb, var(--surface-1) 55%, transparent); }
+.system-mark { display: inline-block; width: 10px; height: 10px; border: 1px solid var(--accent-primary); box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--accent-primary) 8%, transparent); }
+.dark .system-mark { border-color: var(--accent-primary); }
+.system-rows > div::before { content: ''; position: absolute; top: 1.55rem; left: 0; width: 5px; height: 5px; background: var(--accent-primary); }
+.system-rows > div:not(:last-child) { border-bottom: 1px solid color-mix(in srgb, var(--steel) 16%, transparent); }
+.hero-system { position: relative; isolation: isolate; }
+.hero-grid { position: absolute; pointer-events: none; z-index: -1; inset: 0; background-image: linear-gradient(color-mix(in srgb, var(--surface-1) 10%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--surface-1) 10%, transparent) 1px, transparent 1px); background-size: 48px 48px; mask-image: linear-gradient(110deg, transparent 15%, var(--mask-solid) 95%); }
+.dark .hero-grid { opacity: .45; }
+.experience-track { position: relative; }
+.experience-track::before { content: ''; position: absolute; left: 5px; top: 8px; bottom: 8px; width: 1px; background: color-mix(in srgb, var(--accent-primary) 30%, transparent); }
+.timeline-node { position: absolute; left: 1px; top: 5px; width: 9px; height: 9px; border: 2px solid var(--accent-primary); background: var(--bg-page); border-radius: 2px; }
+.dark .timeline-node { background: var(--surface-1); border-color: var(--accent-primary); }
+.category-icon { display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid color-mix(in srgb, var(--accent-primary) 20%, transparent); border-radius: 6px; background: color-mix(in srgb, var(--accent-primary) 7%, transparent); color: var(--accent-primary); }
+.dark .category-icon { color: var(--accent-primary); background: color-mix(in srgb, var(--accent-primary) 6%, transparent); }
+.architecture-node { padding: .25rem .5rem; background: color-mix(in srgb, var(--accent-primary) 5%, transparent); border: 1px solid color-mix(in srgb, var(--accent-primary) 20%, transparent); border-radius: 4px; }
+.flagship-panel { border-color: color-mix(in srgb, var(--accent-primary) 35%, transparent); }
+.dark .flagship-panel { border-color: color-mix(in srgb, var(--accent-primary) 25%, transparent); background: linear-gradient(120deg, color-mix(in srgb, var(--surface-1) 92%, transparent), color-mix(in srgb, var(--surface-1) 98%, transparent) 65%); }
+.contact-panel { border-top-color: color-mix(in srgb, var(--accent-primary) 50%, transparent); }
+.nav-link { position: relative; border-radius: 4px; transition: color 160ms, background-color 160ms; }
+.nav-link[aria-current="location"] { color: var(--accent-primary); background: color-mix(in srgb, var(--accent-primary) 8%, transparent); }
+.dark .nav-link[aria-current="location"] { color: var(--accent-primary); background: color-mix(in srgb, var(--accent-primary) 7%, transparent); }
+.nav-link:hover { background: color-mix(in srgb, var(--steel) 10%, transparent); }
+.eyebrow { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+@media (prefers-reduced-motion: no-preference) {
+  .engineering-card, .project-panel, .capability-panel { transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease; }
+  .button-primary, .button-secondary { transition: background-color 160ms, box-shadow 160ms; }
+  .button-primary:hover { box-shadow: 0 4px 16px color-mix(in srgb, var(--accent-primary) 13%, transparent); }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .engineering-card:hover, .project-panel:hover, .capability-panel:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--accent-primary) 50%, transparent); box-shadow: inset 0 1px 0 color-mix(in srgb, var(--steel) 12%, transparent), 0 18px 36px -24px color-mix(in srgb, var(--accent-primary) 30%, transparent); }
+}
+@media (forced-colors: active) {
+  .technical-panel, .metadata-panel, .architecture-node { border-color: CanvasText; }
+  .nav-link[aria-current="location"] { outline: 1px solid Highlight; }
+}
+
+/* Diagram language shared by conceptual workflows and application architectures. */
+.system-flow { margin-top: 1.75rem; padding: 1.25rem 0; border-top: 1px solid color-mix(in srgb, var(--steel) 20%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--steel) 20%, transparent); }
+.flow-chain { display: flex; flex-direction: column; gap: 0; }
+.flow-step { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; }
+.flow-node { display: flex; align-items: center; gap: .5rem; padding: .55rem .7rem; font-size: .875rem; line-height: 1.5; border: 1px solid color-mix(in srgb, var(--accent-primary) 25%, transparent); background: color-mix(in srgb, var(--steel) 50%, transparent); border-radius: 4px; }
+.flow-port { display: inline-block; flex-shrink: 0; width: 5px; height: 5px; background: var(--accent-primary); border-radius: 1px; }
+.flow-connector { display: block; position: relative; margin-left: 1rem; height: 16px; width: 1px; background: var(--accent-primary); }
+.flow-connector::after { content: ''; position: absolute; width: 5px; height: 5px; border-right: 1px solid var(--accent-primary); border-bottom: 1px solid var(--accent-primary); transform: rotate(45deg); bottom: 2px; left: -2px; }
+.dark .flow-node { background: color-mix(in srgb, var(--accent-primary) 7%, transparent); border-color: color-mix(in srgb, var(--accent-primary) 23%, transparent); }
+.dark .flow-port { background: var(--accent-primary); }
+.domain-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .5rem; }
+.domain-grid li { display: flex; align-items: center; gap: .6rem; padding: .65rem; font-size: .875rem; border-left: 1px solid color-mix(in srgb, var(--accent-primary) 40%, transparent); background: color-mix(in srgb, var(--accent-primary) 5%, transparent); }
+.discipline-map { position: relative; margin: 1.5rem 0; }
+.discipline-nodes { position: relative; display: grid; gap: 1rem; }
+.discipline-node { min-width: 0; padding: 1rem; border: 1px solid color-mix(in srgb, var(--accent-primary) 30%, transparent); background: var(--surface-2); border-radius: 5px; box-shadow: 0 5px 12px -10px color-mix(in srgb, var(--surface-1) 30%, transparent); }
+.dark .discipline-node { background: var(--surface-2); border-color: color-mix(in srgb, var(--accent-primary) 27%, transparent); }
+.map-wiring { display: none; position: absolute; inset: 0; width: 100%; height: 100%; color: var(--accent-primary); }
+.map-hub { fill: var(--surface-2); stroke: currentColor; stroke-width: 1; }
+.dark .map-hub { fill: var(--surface-2); }
+.dark .map-wiring { color: var(--accent-primary); }
+.system-map-panel { background-image: radial-gradient(color-mix(in srgb, var(--accent-primary) 12%, transparent) .7px, transparent .7px); background-size: 16px 16px; }
+.experience-domain { border: 1px solid color-mix(in srgb, var(--steel) 22%, transparent); border-radius: 5px; background: color-mix(in srgb, var(--steel) 50%, transparent); }
+.dark .experience-domain { background: color-mix(in srgb, var(--surface-1) 60%, transparent); }
+.experience-domain .timeline-node { left: -27px; top: 1.6rem; }
+.experience-domain::before { content: ''; position: absolute; left: -20px; top: 1.85rem; width: 20px; height: 1px; background: color-mix(in srgb, var(--accent-primary) 40%, transparent); }
+@media (min-width: 430px) {
+  .discipline-map { min-height: 350px; }
+  .discipline-nodes { min-height: 350px; grid-template-columns: repeat(2,minmax(0,1fr)); align-content: space-between; column-gap: 2.25rem; row-gap: 5rem; }
+  .map-wiring { display: block; }
+}
+@media (max-width: 429px) {
+  .discipline-nodes { border-left: 1px solid color-mix(in srgb, var(--accent-primary) 40%, transparent); padding-left: 1rem; }
+  .discipline-node { position: relative; }
+  .discipline-node::before { content: ''; position: absolute; left: -1rem; top: 1.5rem; width: 1rem; height: 1px; background: var(--accent-primary); }
+  .domain-grid { grid-template-columns: minmax(0,1fr); }
+}
+@media (min-width: 1280px) {
+  .flow-chain { flex-direction: row; flex-wrap: wrap; gap: .5rem 0; }
+  .flow-step { flex-direction: row; align-items: center; }
+  .flow-connector { margin-left: 0; height: 1px; width: 12px; }
+  .flow-connector::after { transform: rotate(-45deg); left: auto; right: 2px; bottom: -2px; }
+}
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  a > svg:last-child { transition: transform 160ms ease; }
+  a:hover > svg:last-child { transform: translate(2px,-2px); }
+}
+
+/* Surface hierarchy: identity / flagships, workflows, then supporting panels. */
+.technical-panel, .dark .technical-panel {
+  background: linear-gradient(145deg, color-mix(in srgb, var(--surface-2) 94%, transparent), color-mix(in srgb, var(--surface-1) 94%, transparent));
+  border-color: var(--border-steel);
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--shadow-color) 5%, transparent), inset 0 1px 0 color-mix(in srgb, var(--highlight) 5%, transparent);
+}
+.profile-panel, .flagship-panel, .contact-panel, .dark .profile-panel, .dark .flagship-panel, .dark .contact-panel {
+  border-color: color-mix(in srgb, var(--steel) 28%, transparent);
+  box-shadow: 0 18px 50px color-mix(in srgb, var(--shadow-color) 12%, transparent), inset 0 1px 0 color-mix(in srgb, var(--highlight) 8%, transparent);
+}
+.engineering-card, .experience-domain { box-shadow: 0 10px 30px color-mix(in srgb, var(--shadow-color) 6%, transparent); }
+.capability-panel, .dark .capability-panel { background: var(--surface-1); box-shadow: inset 0 1px 0 color-mix(in srgb, var(--highlight) 4%, transparent); }
+.tech-chip { border-color: transparent; background: color-mix(in srgb, var(--steel) 8%, var(--surface-1)); }
+.flow-node, .discipline-node, .dark .flow-node, .dark .discipline-node { background: var(--surface-2); border-color: color-mix(in srgb, var(--steel) 30%, transparent); }
+.flow-step:last-child .flow-node { border-color: color-mix(in srgb, var(--accent-primary) 45%, transparent); }
+.flow-connector, .discipline-node::before { background: var(--steel); }
+.flow-connector::after { border-color: var(--steel); }
+.map-wiring, .dark .map-wiring { color: var(--accent-secondary); }
+.nav-link[aria-current="location"], .dark .nav-link[aria-current="location"] { color: var(--accent-primary); background: color-mix(in srgb, var(--accent-primary) 4%, transparent); box-shadow: inset 0 -2px var(--accent-primary); }
+.button-primary, .button-secondary { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; gap: .7rem; border: 1px solid; border-radius: 6px; padding: .75rem 1rem; font-size: .875rem; font-weight: 600; }
+.button-primary { background: var(--button-bg); color: var(--button-text); border-color: var(--button-bg); }
+.button-primary:hover { background: color-mix(in srgb, var(--button-bg) 92%, var(--accent-secondary)); }
+.button-secondary { color: var(--text-primary); border-color: var(--border-steel); background: transparent; }
+.button-secondary:hover { border-color: var(--accent-primary); background: color-mix(in srgb, var(--accent-primary) 5%, transparent); }
+.portrait-system-composition { display: grid; gap: 1.25rem; margin-top: 1.5rem; }
+.professional-portrait { width: min(100%, 260px); aspect-ratio: 4 / 5; height: auto; object-fit: cover; object-position: 50% 45%; justify-self: center; border-radius: 16px; border: 1px solid color-mix(in srgb, var(--steel) 45%, transparent); box-shadow: 0 12px 24px color-mix(in srgb, var(--shadow-color) 15%, transparent), 1px 0 0 color-mix(in srgb, var(--accent-primary) 25%, transparent); }
+.portrait-system-detail { min-width: 0; }
+.contact-status { padding: 1.25rem; border-left: 1px solid var(--border-steel); }
+.status-dot { width: 7px; height: 7px; margin-top: .35rem; flex-shrink: 0; border-radius: 50%; background: var(--status-positive); }
+@media (min-width: 640px) {
+  .portrait-system-composition { grid-template-columns: minmax(0,.9fr) minmax(0,1fr); align-items: center; }
+  .portrait-system-detail .discipline-map, .portrait-system-detail .discipline-nodes { min-height: 0; }
+  .portrait-system-detail .discipline-nodes { grid-template-columns: minmax(0,1fr); gap: .65rem; border-left: 1px solid var(--border-steel); padding-left: .8rem; }
+  .portrait-system-detail .map-wiring { display: none; }
+  .portrait-system-detail .discipline-node { position: relative; padding: .65rem; }
+  .portrait-system-detail .discipline-node::before { content: ''; position: absolute; left: -.8rem; top: 1.2rem; width: .8rem; height: 1px; background: var(--steel); }
+}
+
+.nav-surface { background: color-mix(in srgb, var(--bg-page) 90%, transparent); }
+.eyebrow, .nav-link[aria-current="location"], .dark .nav-link[aria-current="location"] { color: var(--accent-text); }
